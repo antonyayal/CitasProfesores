@@ -67,7 +67,7 @@
 					<form role="form" method="post" action="agregar_usuario.html"
 						modelAttribute="usuario">
 						<fieldset>
-							<p class="text-uppercase pull-center">¡Registrate!</p>
+								<h3>¡Registrate!</h3>
 							<div class="form-group">
 								<input type="text" name="nombre" id="nombre"
 									class="form-control input-lg" placeholder="Nombre" required>
@@ -84,7 +84,7 @@
 							</div>
 
 							<div class="form-group">
-								<p class="text-uppercase pull-center">Facultad</p>
+								<h4>Facultad</h4>
 								<div class="form-group">
 									<select name="facultad" id="facultad"
 										class="form-control input-lg">
@@ -109,14 +109,14 @@
 
 									<input type="text" name="rfc" id="rfc"
 										class="form-control input-lg" placeholder="RFC"
-										disabled="true">
+										disabled="true" required>
 								</div>
 
 								<div class="form-group">
-									<p class="text-uppercase pull-center">Departamento</p>
+									<h4>Departamento<h4>
 									<div class="form-group">
 										<select name="departamento" id="departamento"
-											class="form-control input-lg" disabled="true">
+											class="form-control input-lg" disabled="true" required>
 											<option value="Matematicas">Matematicas</option>
 											<option value="Fisica">Fisica</option>
 											<option value="Computacion">Computacion</option>
@@ -127,11 +127,11 @@
 
 								<div class="form-group">
 									<input type="text" name="nCuenta" id="nCuenta"
-										class="form-control input-lg" placeholder="No. Cuenta">
+										class="form-control input-lg" placeholder="No. Cuenta" required>
 								</div>
 								<div class="form-group">
 									<input type="text" name="carrera" id="carrera"
-										class="form-control input-lg" placeholder="Carrera">
+										class="form-control input-lg" placeholder="Carrera" required>
 								</div>
 								<script type="text/javascript">
 									function carg(elemento) {
@@ -142,7 +142,8 @@
 												.getElementById('rfc');
 										var departamento = document
 												.getElementById('departamento');
-										var nCuenta = document
+										
+									var nCuenta = document
 												.getElementById('nCuenta');
 										var carrera = document
 												.getElementById('carrera');
@@ -151,14 +152,16 @@
 											carrera.disabled = false;
 											rfc.disabled = true;//se desactivan los campos
 											departamento.disabled = true;
-											nCuenta.required = required;
-											carrera.required = required;
+											nCuenta.required = true;
+											carrera.required = true;
 										} else {
-	
-									nCuenta.disabled = true;
+
+											nCuenta.disabled = true;
 											carrera.disabled = true;
 											rfc.disabled = false;//se desactivan los campos
 											departamento.disabled = false;
+											rfc.required = true;
+											departamento.required = true;
 										}
 									}
 								</script>
@@ -171,18 +174,18 @@
 							</div>
 							<div class="form-group">
 								<input type="password" name="password" id="password"
-									class="form-control input-lg" placeholder="Contraseña" 	min="8" max="20" required>
+									class="form-control input-lg" placeholder="Contraseña" minlength="8" maxlength="20" required>
 								<small id="passwordHelpBlock" class="form-text text-muted">Tu contraseña debe tener de
 									8-20 caracteres sin espacios.</small>
 							</div>
 							<div class="form-check">
 								<label class="form-check-label"> <input type="checkbox"
-									class="form-check-input"> Aceptar términos y
+									class="form-check-input" required> Aceptar términos y
 									condiciones del Aviso de Privacidad.
 								</label>
 							</div>
 							<div>
-								<input type="submit" class="btn btn-lg btn-primary"
+								<input type="submit" class="btn btn-success btn-lg"	
 									value="Registrar">
 							</div>
 						</fieldset>
@@ -197,19 +200,21 @@
 					<form role="form" method="post" action="ingresar.html"
 						modelAttribute="login">
 						<fieldset>
-							<p class="text-uppercase">Login</p>
+								<h3>Login</h3>
 
 							<div class="form-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 								<input type="email" name="email" id="email"
 									class="form-control input-lg" placeholder="E-mail" required>
 							</div>
 							<div class="form-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 								<input type="password" name="password" id="password"
 									class="form-control input-lg" placeholder="Contraseña" required>
 									<errors path="password" cssClass="error"/>
 							</div>
 							<div>
-								<input type="submit" class="btn btn-lg btn-primary"
+								<input type="submit" class="btn btn-success btn-lg"
 									value="Login">
 							</div>
 

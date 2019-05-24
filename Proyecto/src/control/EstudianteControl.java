@@ -2,7 +2,11 @@ package control;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import java.lang.Iterable;
 
 import beans.Login;
@@ -23,6 +27,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -131,7 +136,7 @@ public class EstudianteControl {
 			CitaDAO dao = (CitaDAO)context.getBean( "citaDAO" );
 
 			cita.setId_profesor((int)usr.getId_usuario());
-
+			cita.setFecha(cita.getFecha());
 			dao.agregaCita(cita);
 		}
 		return new ModelAndView( "ver_citas" , "usuario", usr );
@@ -155,9 +160,9 @@ public class EstudianteControl {
 
 		listaCitas2.setListaCitas( lista2 );
 
-
 		return new ModelAndView( "ver_citas" , "usuario", usr );
 	}
+	
 	@RequestMapping( value = "/ver_citas_solicitadas", method = RequestMethod.POST )
 	public ModelAndView ver_citas_solicitadas(@ModelAttribute("listaCitas") ListaCitas listaCitas) {
 
@@ -169,29 +174,68 @@ public class EstudianteControl {
 		
 		return new ModelAndView( "ver_citas_solicitadas" , "usuario", usr );
 	}
+	
+	@RequestMapping( value = "/borra_cita", method = RequestMethod.POST )
+	public ModelAndView borra_cita(@ModelAttribute("cita") Cita cita) {
 
+
+		ApplicationContext context = new ClassPathXmlApplicationContext( "Spring-Datasource.xml" );	            
+		CitaDAO dao = (CitaDAO)context.getBean( "citaDAO" );
+		System.out.println(cita.getId_cita());
+		dao.borraCita(cita.getId_cita());
+		
+		return new ModelAndView( "ver_citas" , "usuario", usr );
+	}
 
 
 	//////////////////////////////ALUMNO////////////////////////////////
-
 	@RequestMapping( value = "/administrar_datos_alumno", method = RequestMethod.POST )
 	public ModelAndView administrar_datos_alumno(@ModelAttribute("usuario") Usuario usuario) {
-
+		usuario = usr;
 
 		return new ModelAndView( "administrar_datos_alumno" , "usuario", usuario );
 	}
+	
+	@RequestMapping( value = "/actualizar_datos_alumno", method = RequestMethod.POST )
+	public ModelAndView actualizar_datos_alumno(@ModelAttribute("usuario") Usuario usuario) {
+
+		usr.setNombre(usuario.getNombre());
+		usr.setApellido1(usuario.getApellido1());
+		usr.setApellido2(usuario.getApellido2());
+		ApplicationContext context = new ClassPathXmlApplicationContext( "Spring-Datasource.xml" );
+		UsuarioDAO dao = (UsuarioDAO)context.getBean( "usuarioDAO" );
+		dao.modificaUsuario(usr);
+
+		return new ModelAndView( "administrar_datos_alumno" , "usuario", usr );
+	}
 
 	@RequestMapping( value = "/ver_citas_agendadas", method = RequestMethod.POST )
-	public ModelAndView ver_citas_agendadas(@ModelAttribute("usuario") Usuario usuario) {
+	public ModelAndView ver_citas_agendadas(@ModelAttribute("listaCitas") ListaCitas listaCitas) {
 
+		ApplicationContext context = new ClassPathXmlApplicationContext( "Spring-Datasource.xml" );	            
+		CitaDAO dao = (CitaDAO)context.getBean( "citaDAO" );
 
-		return new ModelAndView( "ver_citas_agendadas" , "usuario", usuario );
+		ArrayList<Cita> lista = dao.consultaTodosAlumnoAgendadas( usr.getId_usuario());
+
+		listaCitas.setListaCitas( lista );
+		
+	
+		
+		return new ModelAndView( "ver_citas_agendadas" , "usuario", usr );
 	}
+	
 	@RequestMapping( value = "/solicitar_cita", method = RequestMethod.POST )
-	public ModelAndView solicitar_cita(@ModelAttribute("usuario") Usuario usuario) {
+	public ModelAndView solicitar_cita(@ModelAttribute("listaCitas") ListaCitas listaCitas) {
 
+		ApplicationContext context = new ClassPathXmlApplicationContext( "Spring-Datasource.xml" );	            
+		CitaDAO dao = (CitaDAO)context.getBean( "citaDAO" );
 
-		return new ModelAndView( "solicitar_cita" , "usuario", usuario );
+		ArrayList<Cita> lista = dao.consultaTodosDisponiblesArray();
+		listaCitas.setListaCitas( lista );
+		
+		System.out.println("#20000000000000000000000000000000000000000000000000000000000000");
+		
+		return new ModelAndView( "solicitar_cita" , "listaCitas", listaCitas );
 	}
 
 

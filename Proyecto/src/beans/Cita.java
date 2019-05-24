@@ -15,7 +15,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Cita {
 
 		private int id_cita;
-		private Date fecha;
+		private String materia;
+		private String fecha;
 		private String hora;
 		private String lugar;
 		private int id_alumno;
@@ -30,9 +31,10 @@ public class Cita {
 			
 		}
 		
-		public Cita(int id_cita, Date fecha, String hora, String lugar,
+		public Cita(int id_cita,String mat, String fecha, String hora, String lugar,
 		int al, int pr, boolean solicitada, boolean asignada) {
 			this.id_cita= id_cita;
+			this.materia = mat;
 			this.fecha= fecha;
 			this.hora= hora;
 			this.lugar= lugar;
@@ -49,12 +51,20 @@ public class Cita {
 		public void setId_cita(int id_cita) {
 			this.id_cita = id_cita;
 		}
+		
+		public String getMateria() {
+			return materia;
+		}
 
-		public Date getFecha() {
+		public void setMateria(String materia) {
+			this.materia = materia;
+		}
+
+		public String getFecha() {
 			return fecha;
 		}
 
-		public void setFecha(Date fecha) {
+		public void setFecha(String fecha) {
 			this.fecha = fecha;
 		}
 

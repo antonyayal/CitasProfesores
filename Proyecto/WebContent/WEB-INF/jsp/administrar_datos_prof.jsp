@@ -73,8 +73,20 @@
 
 			<div class="col-md-3">
 
-				<p class="text-uppercase">Opciones</p>
+				<h3>Menú</h3>
+				<hr>
 				<div class="form-group">
+				<div>
+						<form role="form" method="post"
+							action="administrar_datos_prof.html" modelAttribute="usuario">
+							<fieldset>
+								<div>
+									<input type="submit" class="btn btn-primary btn-lg"
+										value="Administrar mis datos" disabled="true">
+								</div>
+							</fieldset>
+						</form>
+					</div>
 					<div>
 						<form role="form" method="post" action="publicar_cita.html"
 							modelAttribute="usuario">
@@ -92,7 +104,7 @@
 							<fieldset>
 								<div>
 									<input type="submit" class="btn btn-primary btn-lg"
-										value="Ver Citas">
+										value="Mis Citas">
 								</div>
 							</fieldset>
 						</form>
@@ -103,22 +115,12 @@
 							<fieldset>
 								<div>
 									<input type="submit" class="btn btn-primary btn-lg"
-										value="Ver Citas Solicitadas">
+										value="Mis citas solicitadas">
 								</div>
 							</fieldset>
 						</form>
 					</div>
-					<div>
-						<form role="form" method="post"
-							action="administrar_datos_prof.html" modelAttribute="usuario">
-							<fieldset>
-								<div>
-									<input type="submit" class="btn btn-primary btn-lg"
-										value="Administrar mis datos" disabled="true">
-								</div>
-							</fieldset>
-						</form>
-					</div>
+					<hr>
 				</div>
 			</div>
 			<div class="col-md-2">
@@ -134,6 +136,7 @@
 								<input type="text" name="id_profesor" id="id_profesor"
 									class="form-control input-lg" placeholder="id_profesor"
 									value="${usuario.id_usuario}" disabled="true">
+								
 							</div>
 							<div class="form-group">
 								<input type="text" name="nombre" id="nombre"
@@ -184,7 +187,7 @@
 				</div>
 
 			</div>
-		</div>
+		</div><hr>
 		<p class="text-center">
 			<small id="passwordHelpInline" class="text-muted">
 				Developer:Antonio Ayala & Fernando Sánchez PCIC UNAM @2019 </small>

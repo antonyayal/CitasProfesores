@@ -63,7 +63,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="container">
-			<h2 class="text-center" id="title">Publicar cita</h2>
+			<h2 class="text-center" id="title">Mis citas</h2>
 			<p class="text-center">
 				<small id="passwordHelpInline" class="text-muted"> Posgrado
 					de Ciencia e Ingeniería de la Computación</small>
@@ -72,8 +72,20 @@
 
 			<div class="col-md-3">
 
-				<p class="text-uppercase">Opciones</p>
+				<h3>Menú</h3>
+				<hr>
 				<div class="form-group">
+					<div>
+						<form role="form" method="post"
+							action="administrar_datos_prof.html" modelAttribute="usuario">
+							<fieldset>
+								<div>
+									<input type="submit" class="btn btn-primary btn-lg"
+										value="Administrar mis datos">
+								</div>
+							</fieldset>
+						</form>
+					</div>
 					<div>
 						<form role="form" method="post" action="publicar_cita.html"
 							modelAttribute="usuario">
@@ -91,33 +103,23 @@
 							<fieldset>
 								<div>
 									<input type="submit" class="btn btn-primary btn-lg"
-										value="Ver Citas" disabled="true">
-								</div>
-							</fieldset>
-						</form>
-					</div>
-					<div>
-						<form role="form" method="post" action="ver_citas_solicitadas.html"
-							modelAttribute="usuario">
-							<fieldset>
-								<div>
-									<input type="submit" class="btn btn-primary btn-lg"
-										value="Ver Citas Solicitadas">
+										value="Mis Citas" disabled="true">
 								</div>
 							</fieldset>
 						</form>
 					</div>
 					<div>
 						<form role="form" method="post"
-							action="administrar_datos_prof.html" modelAttribute="usuario">
+							action="ver_citas_solicitadas.html" modelAttribute="usuario">
 							<fieldset>
 								<div>
 									<input type="submit" class="btn btn-primary btn-lg"
-										value="Administrar mis datos">
+										value="Mis citas solicitadas">
 								</div>
 							</fieldset>
 						</form>
 					</div>
+					<hr>
 				</div>
 			</div>
 
@@ -128,20 +130,20 @@
 
 			<div class="row">
 				<div class="col-md-6">
-					<form role="form" method="post" action="ver_citas.html"
-						modelAttribute="listaCitas">
-						<fieldset>
-							<p class="text-uppercase pull-center">Mis citas asignadas</p>
+					
+							<h4>Mis citas asignadas</h4>
 							<div class="form-group">
 
-								<table class="table">
+								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th scope="col">Id Cita</th>
-											<th scope="col">Fecha</th>
-											<th scope="col">Hora</th>
-											<th scope="col">Lugar</th>
-											<th scope="col">Alumno</th>
+											<th class="warning" scope="col">#Cita</th>
+											<th class="warning" scope="col">Materia</th>
+											<th class="warning" scope="col">Lugar</th>
+											<th class="warning" scope="col">Fecha</th>
+											<th class="warning" scope="col">Hora</th>
+											<th class="warning" scope="col">Alumno</th>
+											<th class="warning" scope="col">Eliminar</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -149,38 +151,46 @@
 											varStatus="status">
 											<tr>
 												<th scope="row">${cita.id_cita}</th>
+												<td>${cita.materia}</td>
+												<td>${cita.lugar}</td>
 												<td>${cita.fecha}</td>
 												<td>${cita.hora}</td>
-												<td>${cita.lugar}</td>
-												<td>${cita.id_alumno}</td>
+												<td>${cita.nombre_alumno}</td>
+
+												<td>
+												<a href="${pageContext.request.contextPath}/borrar_cita/${cita.id_cita}.html"
+												onclick="return confirm('¿Estas seguro que quieres borrar la cita?')">
+														<img
+														src="${pageContext.request.contextPath}/img/delete_icon.gif"
+														border="0" title="Borra cita" />
+												</a></td>
 											</tr>
 
 										</c:forEach>
-										
+
 									</tbody>
 								</table>
 
 							</div>
-						
-						</fieldset>
-					</form>
 
 
+					<hr>
 
 					<form role="form" method="post" action="ver_citas.html"
 						modelAttribute="listaCitas2">
 						<fieldset>
-							<p class="text-uppercase pull-center">Mis citas disponibles</p>
+							<h4>Mis citas disponibles</h4>
 							<div class="form-group">
 
-								<table class="table">
+								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th scope="col">Id Cita</th>
-											<th scope="col">Fecha</th>
-											<th scope="col">Hora</th>
-											<th scope="col">Lugar</th>
-											<th scope="col">Alumno</th>
+											<th class="success" scope="col">#Cita</th>
+											<th class="success" scope="col">Materia</th>
+											<th class="success" scope="col">Lugar</th>
+											<th class="success" scope="col">Fecha</th>
+											<th class="success" scope="col">Hora</th>
+											<th class="success" scope="col">Eliminar</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -188,10 +198,28 @@
 											varStatus="status">
 											<tr>
 												<th scope="row">${cita.id_cita}</th>
+												<td>${cita.materia}</td>
+												<td>${cita.lugar}</td>
 												<td>${cita.fecha}</td>
 												<td>${cita.hora}</td>
-												<td>${cita.lugar}</td>
-												<td>${cita.id_alumno}</td>
+
+												<td>
+													<form role="form" method="post" action="borra_cita.html"
+														modelAttribute="cita">
+														<fieldset>
+															<div>
+																<input type="submit" class="btn btn-primary btn-lg"
+																	value="X">
+															</div>
+														</fieldset>
+													</form> <a
+													action="${pageContext.request.contextPath}/borrar_cita/${cita.id_cita}.html"
+													onclick="return confirm('¿Estas seguro que quieres borrar la cita?')">
+														<img
+														src="${pageContext.request.contextPath}/img/delete_icon.gif"
+														border="0" title="Borra cita" />
+												</a>
+												</td>
 											</tr>
 
 										</c:forEach>
@@ -213,6 +241,8 @@
 								</table>
 
 							</div>
+					<form role="form" method="post" action="ver_citas.html" modelAttribute="listaCitas">
+						<fieldset>
 							<div>
 								<input type="submit" class="btn btn-primary btn-lg"
 									value="Actualizar">
@@ -226,6 +256,7 @@
 
 			</div>
 		</div>
+		<hr>
 		<p class="text-center">
 			<small id="passwordHelpInline" class="text-muted">
 				Developer:Antonio Ayala & Fernando Sánchez PCIC UNAM @2019 </small>

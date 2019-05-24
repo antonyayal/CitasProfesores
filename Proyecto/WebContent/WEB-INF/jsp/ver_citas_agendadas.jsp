@@ -63,7 +63,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="container">
-			<h2 class="text-center" id="title">Ver citas</h2>
+			<h2 class="text-center" id="title">Mis citas</h2>
 			<p class="text-center">
 				<small id="passwordHelpInline" class="text-muted"> Posgrado
 					de Ciencia e Ingeniería de la Computación</small>
@@ -72,7 +72,7 @@
 
 			<div class="col-md-3">
 
-				<p class="text-uppercase">Opciones</p>
+				<p class="text-uppercase">Menú</p>
 				<div class="form-group">
 					<div>
 						<form role="form" method="post" action="solicitar_cita.html"
@@ -118,50 +118,44 @@
 
 			<div class="row">
 				<div class="col-md-6">
-					<form role="form" method="post" action="success.jsp">
+					<form role="form" method="post" action="ver_citas_agendadas.html"
+						modelAttribute="listaCitas">
 						<fieldset>
 							<p class="text-uppercase pull-center">Mis citas</p>
 							<div class="form-group">
 
-								<table class="table">
+								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th scope="col">Id Cita</th>
-											<th scope="col">Fecha</th>
-											<th scope="col">Hora</th>
-											<th scope="col">Lugar</th>
-											<th scope="col">Profesor</th>
+											<th class="warning" scope="col">#Cita</th>
+											<th class="warning" scope="col">Materia</th>
+											<th class="warning" scope="col">Lugar</th>
+											<th class="warning" scope="col">Fecha</th>
+											<th class="warning" scope="col">Hora</th>
+											<th class="warning" scope="col">Profesor</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${listacitas.cita}" var="cita"
+										<c:forEach items="${listaCitas.listaCitas}" var="cita"
 											varStatus="status">
 											<tr>
 												<th scope="row">${cita.id_cita}</th>
+												<td>${cita.materia}</td>
+												<td>${cita.lugar}</td>
 												<td>${cita.fecha}</td>
 												<td>${cita.hora}</td>
-												<td>${cita.lugar}</td>
-												<td>${cita.alumno}</td>
+												<td>${cita.nombre_profesor}</td>
 											</tr>
 
 										</c:forEach>
-										<tr>
-											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>@fat</td>
-											<td>@mdo</td>
-										</tr>
+										
 									</tbody>
 								</table>
 
+							</div>
+							<div>
+								<input type="submit" class="btn btn-primary btn-lg"
+									value="Actualizar">
 							</div>
 						</fieldset>
 					</form>

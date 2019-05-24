@@ -63,7 +63,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="container">
-			<h2 class="text-center" id="title">Publicar cita</h2>
+			<h2 class="text-center" id="title">Mis citas solicitadas</h2>
 			<p class="text-center">
 				<small id="passwordHelpInline" class="text-muted"> Posgrado
 					de Ciencia e Ingeniería de la Computación</small>
@@ -72,8 +72,20 @@
 
 			<div class="col-md-3">
 
-				<p class="text-uppercase">Opciones</p>
+				<h3>Menú</h3>
+				<hr>
 				<div class="form-group">
+					<div>
+						<form role="form" method="post"
+							action="administrar_datos_prof.html" modelAttribute="usuario">
+							<fieldset>
+								<div>
+									<input type="submit" class="btn btn-primary btn-lg"
+										value="Administrar mis datos">
+								</div>
+							</fieldset>
+						</form>
+					</div>
 					<div>
 						<form role="form" method="post" action="publicar_cita.html"
 							modelAttribute="usuario">
@@ -91,7 +103,7 @@
 							<fieldset>
 								<div>
 									<input type="submit" class="btn btn-primary btn-lg"
-										value="Ver Citas">
+										value="Mis citas">
 								</div>
 							</fieldset>
 						</form>
@@ -102,22 +114,12 @@
 							<fieldset>
 								<div>
 									<input type="submit" class="btn btn-primary btn-lg"
-										value="Ver Citas Solicitadas" disabled="true">
+										value="Mis citas solicitadas" disabled="true">
 								</div>
 							</fieldset>
 						</form>
 					</div>
-					<div>
-						<form role="form" method="post"
-							action="administrar_datos_prof.html" modelAttribute="usuario">
-							<fieldset>
-								<div>
-									<input type="submit" class="btn btn-primary btn-lg"
-										value="Administrar mis datos">
-								</div>
-							</fieldset>
-						</form>
-					</div>
+					<hr>
 				</div>
 			</div>
 
@@ -132,18 +134,19 @@
 					<form role="form" method="post" action="ver_citas_solicitadas.html"
 						modelAttribute="listaCitas">
 						<fieldset>
-							<p class="text-uppercase pull-center">Mis citas disponibles</p>
+							<h4>Mis citas solicitadas</h4>
 							<div class="form-group">
 
-								<table class="table">
+								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th scope="col">Id Cita</th>
-											<th scope="col">Fecha</th>
-											<th scope="col">Hora</th>
-											<th scope="col">Lugar</th>
-											<th scope="col">Alumno</th>
-											<th scope="col">Aceptar</th>
+											<th class="info" scope="col">#Cita</th>
+											<th class="info" scope="col">Materia</th>
+											<th class="info" scope="col">Lugar</th>
+											<th class="info" scope="col">Fecha</th>
+											<th class="info" scope="col">Hora</th>
+											<th class="info" scope="col">Alumno</th>
+											<th class="info" scope="col">Aceptar/ Rechazar</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -151,21 +154,25 @@
 											varStatus="status">
 											<tr>
 												<th scope="row">${cita.id_cita}</th>
+												<td>${cita.materia}</td>
+												<td>${cita.lugar}</td>
 												<td>${cita.fecha}</td>
 												<td>${cita.hora}</td>
-												<td>${cita.lugar}</td>
-												<td>${cita.id_alumno}</td>
-												<td>
-													<div class="btn-group btn-group-toggle"
-														data-toggle="buttons">
-														<label class="btn btn-secondary active"> <input
-															type="radio" name="options" id="option1"
-															autocomplete="off"> Active </label> 
-														<label class="btn btn-secondary"> <input
-															type="radio" name="options" id="option2"
-															autocomplete="off"> Radio 
-													</div>
-
+												<td>${cita.nombre_alumno}</td>
+												
+													<td>
+												<a href="${pageContext.request.contextPath}/aceptar/${cita.id_cita}.html"
+												>
+														<img
+														src="${pageContext.request.contextPath}/img/accept_icon.png"
+														border="0" title="Aceptar cita" height="20" width="20"/>
+												</a>
+												<a href="${pageContext.request.contextPath}/borrar/${cita.id_cita}.html"
+												>
+														<img
+														src="${pageContext.request.contextPath}/img/delete_icon.gif"
+														border="0" title="Borra cita" />
+												</a>
 												</td>
 											</tr>
 
@@ -200,7 +207,7 @@
 
 
 			</div>
-		</div>
+		</div><hr>
 		<p class="text-center">
 			<small id="passwordHelpInline" class="text-muted">
 				Developer:Antonio Ayala & Fernando Sánchez PCIC UNAM @2019 </small>

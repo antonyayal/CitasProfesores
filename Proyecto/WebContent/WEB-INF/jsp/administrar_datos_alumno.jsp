@@ -116,6 +116,9 @@
 
 			<div class="row">
 				<div class="col-md-6">
+				<form role="form" method="post" action="actualizar_datos_alumno.html"
+						modelAttribute="usuario">
+						<fieldset>
 					<div class="form-group">
 						<input type="text" name="nombre" id="nombre"
 							class="form-control input-lg" placeholder="Nombre"

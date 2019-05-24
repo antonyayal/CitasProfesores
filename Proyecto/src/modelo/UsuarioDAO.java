@@ -43,7 +43,7 @@ public class UsuarioDAO extends SimpleJdbcDaoSupport{
 			usuario.setPassword( rs.getString( "password" ) );
 			usuario.setRfc( rs.getString( "rfc" ) );
 			usuario.setDepartamento( rs.getString( "departamento" ) );
-			usuario.setCarrera( rs.getString( "nCuenta" ) );
+			usuario.setnCuenta( rs.getString( "nCuenta" ) );
 			usuario.setCarrera( rs.getString( "carrera" ) );
 
 			return usuario;
@@ -74,4 +74,40 @@ public class UsuarioDAO extends SimpleJdbcDaoSupport{
 				usr.getnCuenta(),usr.getCarrera());
 
 	}
+
+	public String getNombre(int id) {
+		SimpleJdbcTemplate sjdbct = getSimpleJdbcTemplate();
+		ArrayList<Usuario> usuarios =
+				(ArrayList<Usuario>) sjdbct.query( CONSULTATODOS, new ProyectosRowMapper()  );
+		
+		for (Usuario usuario : usuarios){ 
+			if(usuario.getId_usuario() == id) {
+				return usuario.getNombre().toString() +" "+ usuario.getApellido1().toString();
+			}
+		}
+		return null;
+	}
+
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

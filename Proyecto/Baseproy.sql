@@ -33,12 +33,13 @@ CREATE TABLE `cita` (
   `hora` varchar(50) NOT NULL,
   `solicitada` boolean NOT NULL,
   `asignada` boolean NOT NULL,
-  
+  `activa` boolean NOT NULL,
+  `materia` varchar(50) NOT NULL,
   
   PRIMARY KEY  (`id_cita`),
   FOREIGN KEY  (`id_profesor`)REFERENCES usuario(`id_usuario`),
   FOREIGN KEY  (`id_alumno`)REFERENCES usuario(`id_usuario`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=2200 ;
 
 LOCK TABLES `usuario` WRITE;
 INSERT INTO `usuario` VALUES (1,'Fernando','Sánchez','Montoya','Facultad de Ciencias', false,'feroasmon@gmail.com','perrodelmal',null ,null ,'309160568' ,'CC');
@@ -46,7 +47,7 @@ INSERT INTO `usuario` VALUES (2,'Antonio','Ayala','Garras','Facultad de Ingenier
 UNLOCK TABLES;
 
 LOCK TABLES `cita` WRITE;
-INSERT INTO `cita` VALUES (1,2,1,'Facultad de Ciencias','2019-10-25','11:00AM',false,true);
-INSERT INTO `cita` VALUES (2,2,null,'Facultad de Ingenieria','2019-11-25','12:00AM',false,false);
-INSERT INTO `cita` VALUES (3,2,1,'IIMAS','2019-12-25','13:00AM',true,false);
+INSERT INTO `cita` VALUES (2200,2,1,'Facultad de Ciencias','2019-10-25','11:00',false,true,true,'Matematicas');
+INSERT INTO `cita` VALUES (2205,2,null,'Facultad de Ingenieria','2019-11-25','12:00',false,false,true,'Fisica');
+INSERT INTO `cita` VALUES (2208,2,1,'IIMAS','2019-12-25','13:00',true,false,true,'Quimica');
 UNLOCK TABLES;

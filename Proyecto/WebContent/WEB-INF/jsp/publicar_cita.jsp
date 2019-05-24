@@ -72,8 +72,20 @@
 
 			<div class="col-md-3">
 
-				<p class="text-uppercase">Opciones</p>
+				<h3>Menú</h3>
+				<hr>
 				<div class="form-group">
+				<div>
+						<form role="form" method="post"
+							action="administrar_datos_prof.html" modelAttribute="usuario">
+							<fieldset>
+								<div>
+									<input type="submit" class="btn btn-primary btn-lg"
+										value="Administrar mis datos">
+								</div>
+							</fieldset>
+						</form>
+					</div>
 					<div>
 						<form role="form" method="post" action="publicar_cita.html"
 							modelAttribute="usuario">
@@ -107,17 +119,8 @@
 							</fieldset>
 						</form>
 					</div>
-					<div>
-						<form role="form" method="post"
-							action="administrar_datos_prof.html" modelAttribute="usuario">
-							<fieldset>
-								<div>
-									<input type="submit" class="btn btn-primary btn-lg"
-										value="Administrar mis datos">
-								</div>
-							</fieldset>
-						</form>
-					</div>
+					
+					<hr>
 				</div>
 			</div>
 
@@ -130,28 +133,37 @@
 					<form role="form" method="post" action="publica.html"
 						modelAttribute="cita">
 						<fieldset>
-							<p class="text-uppercase pull-center">Publicar nueva cita</p>
+							<h3>Publicar nueva cita</h3>
 
 							<div class="form-group">
 								<input type="text" name="id_profesor" id="id_profesor"
 									class="form-control input-lg" placeholder="id_profesor"
 									value="${usuario.id_usuario}" disabled="true">
+							 
 							</div>
 							<div class="form-group">
+								<input type="text" name="materia" id="materia"
+									class="form-control input-lg" placeholder="Materia">
+							 
+							</div>
+							<div class="form-group">
+							
 								<input type="text" name="lugar" id="lugar"
-									class="form-control input-lg" placeholder="Lugar">
+									class="form-control input-lg" placeholder="Lugar" required>
 							</div>
 							<div class="form-group">
-								<input type="text" name="fecha" id="fecha"
-									class="form-control input-lg" placeholder="yyyy/mm/dd">
+								<input type="date" name="fecha" id="fecha"
+									class=" input-group date" data-date-format="YYYY MM DD"  min="2019-05-21"  required>
+								
 								<small id="horaHelpBlock" class="form-text text-muted">Excepto
 									sábados y domingos.</small>
 							</div>
 
 							<div class="form-group">
-								<input type="text" name="hora" id="hora"
-									class="form-control input-lg" placeholder="00:00"> <small
-									id="horaHelpBlock" class="form-text text-muted">Formato
+								<input type="time" id="hora" name="hora"
+     										  min="7:00" max="20:00"  required> 
+     										  
+									 <small id="horaHelpBlock" class="form-text text-muted">Formato
 									12 h. Rango de 7:00 a 20:00.</small>
 							</div>
 
@@ -169,7 +181,7 @@
 
 
 			</div>
-		</div>
+		</div><hr>
 		<p class="text-center">
 			<small id="passwordHelpInline" class="text-muted">
 				Developer:Antonio Ayala & Fernando Sánchez PCIC UNAM @2019 </small>

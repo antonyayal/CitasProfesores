@@ -117,7 +117,8 @@
 
 			<div class="row">
 				<div class="col-md-6">
-					<form role="form" method="post" action="success.jsp">
+					<form role="form" method="post" action="solicitar_cita.html"
+						modelAttribute="listaCitas">
 						<fieldset>
 							<p class="text-uppercase pull-center">Citas Disponibles</p>
 							<div class="form-group">
@@ -125,46 +126,45 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th scope="col">Id Cita</th>
-											<th scope="col">Fecha</th>
-											<th scope="col">Hora</th>
-											<th scope="col">Lugar</th>
-											<th scope="col">Profesor</th>
-											<th scope="col">Agenda</th>
+											<th class="warning" scope="col">#Cita</th>
+											<th class="warning" scope="col">Materia</th>
+											<th class="warning" scope="col">Lugar</th>
+											<th class="warning" scope="col">Fecha</th>
+											<th class="warning" scope="col">Hora</th>
+											<th class="warning" scope="col">Profesor</th>
+											<th class="warning" scope="col">Solicitar</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${listacitas.cita}" var="cita"
+										<c:forEach items="${listacitas.listaCitas}" var="cita"
 											varStatus="status">
 											<tr>
 												<th scope="row">${cita.id_cita}</th>
+												<td>${cita.materia}</td>
+												<td>${cita.lugar}</td>
 												<td>${cita.fecha}</td>
 												<td>${cita.hora}</td>
-												<td>${cita.lugar}</td>
-												<td>${cita.alumno}</td>
-												<td>${cita.alumno}</td>
+												<td>${cita.nombre_profesor}</td>
+												<td>
+												<a href="${pageContext.request.contextPath}/solicitar/${cita.id_cita}.html"
+												>
+														<img
+														src="${pageContext.request.contextPath}/img/accept_icon.png"
+														border="0" title="Aceptar cita" height="20" width="20"/>
+												</a>
+											
+												</td>
 											</tr>
 
 										</c:forEach>
-										<tr>
-											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-											<td>@mdo</td>
-											<td><input type="submit" class="btn btn-lg btn-primary" value="Solicitar" ></td>
-										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>@fat</td>
-											<td>@mdo</td>
-											<td><input type="submit" class="btn btn-lg btn-primary" value="Solicitar" ></td>
-										</tr>
+									
 									</tbody>
 								</table>
 
+							</div>
+						<div>
+								<input type="submit" class="btn btn-primary btn-lg"
+									value="Actualizar">
 							</div>
 						</fieldset>
 					</form>
