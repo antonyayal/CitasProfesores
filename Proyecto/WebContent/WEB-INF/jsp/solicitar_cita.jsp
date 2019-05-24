@@ -98,13 +98,26 @@
 					</div>
 					<div>
 						<form role="form" method="post"
-							action="administrar_datos_alumno.html"
-							modelAttribute="usuario">
+							action="administrar_datos_alumno.html" modelAttribute="usuario">
 							<fieldset>
 								<div>
 									<input type="submit" class="btn btn-primary btn-lg"
 										value="Administrar mis datos">
 								</div>
+							</fieldset>
+						</form>
+					</div>
+					<div>
+					<form role="form" method="get"
+							action="get.html">
+							<fieldset>
+								<div>
+									<input type="submit" class="btn btn-primary btn-lg"
+										value="Cerrar Sesion"
+										onclick="return confirm('¿ ${usuario.nombre} estas seguro que quieres salir de tu sesión?')"
+										>
+								</div>
+							
 							</fieldset>
 						</form>
 					</div>
@@ -117,10 +130,88 @@
 
 			<div class="row">
 				<div class="col-md-6">
-					<form role="form" method="post" action="solicitar_cita.html"
-						modelAttribute="listaCitas">
-						<fieldset>
-							<p class="text-uppercase pull-center">Citas Disponibles</p>
+					<h4>Citas Disponibles Por Asignatura</h4>
+					<p class="text-uppercase pull-center">Matemáticas</p>
+					<div class="form-group">
+
+						<table class="table">
+							<thead>
+								<tr>
+									<th class="warning" scope="col">#Cita</th>
+									<th class="warning" scope="col">Materia</th>
+									<th class="warning" scope="col">Lugar</th>
+									<th class="warning" scope="col">Fecha</th>
+									<th class="warning" scope="col">Hora</th>
+									<th class="warning" scope="col">Profesor</th>
+									<th class="warning" scope="col">Solicitar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${listaCitas.listaCitas}" var="cita"
+									varStatus="status">
+									<tr>
+										<th scope="row">${cita.id_cita}</th>
+										<td>${cita.materia}</td>
+										<td>${cita.lugar}</td>
+										<td>${cita.fecha}</td>
+										<td>${cita.hora}</td>
+										<td>${cita.nombre_profesor}</td>
+										<td><a
+											href="${pageContext.request.contextPath}/solicitar/${cita.id_cita}.html"
+											onclick="return confirm('¿Estas seguro que quieres solicitar esta cita?')">
+												<img
+												src="${pageContext.request.contextPath}/img/accept_icon.png"
+												border="0" title="Solicitar cita" height="20" width="20" />
+										</a></td>
+									</tr>
+
+								</c:forEach>
+
+							</tbody>
+						</table>
+
+					</div>
+					<p class="text-uppercase pull-center">Fisica</p>
+					<div class="form-group">
+
+						<table class="table">
+							<thead>
+								<tr>
+									<th class="warning" scope="col">#Cita</th>
+									<th class="warning" scope="col">Materia</th>
+									<th class="warning" scope="col">Lugar</th>
+									<th class="warning" scope="col">Fecha</th>
+									<th class="warning" scope="col">Hora</th>
+									<th class="warning" scope="col">Profesor</th>
+									<th class="warning" scope="col">Solicitar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${listaCitas2.listaCitas}" var="cita"
+									varStatus="status">
+									<tr>
+										<th scope="row">${cita.id_cita}</th>
+										<td>${cita.materia}</td>
+										<td>${cita.lugar}</td>
+										<td>${cita.fecha}</td>
+										<td>${cita.hora}</td>
+										<td>${cita.nombre_profesor}</td>
+										<td><a
+											href="${pageContext.request.contextPath}/solicitar/${cita.id_cita}.html"
+											onclick="return confirm('¿Estas seguro que quieres solicitar esta cita?')">
+												<img
+												src="${pageContext.request.contextPath}/img/accept_icon.png"
+												border="0" title="Solicitar cita" height="20" width="20" />
+										</a></td>
+									</tr>
+
+								</c:forEach>
+
+							</tbody>
+						</table>
+
+					</div>
+							<p class="text-uppercase pull-center">Computacion</p>
 							<div class="form-group">
 
 								<table class="table">
@@ -136,7 +227,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${listacitas.listaCitas}" var="cita"
+										<c:forEach items="${listaCitas3.listaCitas}" var="cita"
 											varStatus="status">
 											<tr>
 												<th scope="row">${cita.id_cita}</th>
@@ -145,24 +236,26 @@
 												<td>${cita.fecha}</td>
 												<td>${cita.hora}</td>
 												<td>${cita.nombre_profesor}</td>
-												<td>
-												<a href="${pageContext.request.contextPath}/solicitar/${cita.id_cita}.html"
-												>
+												<td><a
+													href="${pageContext.request.contextPath}/solicitar/${cita.id_cita}.html"
+													onclick="return confirm('¿Estas seguro que quieres solicitar esta cita?')">
 														<img
 														src="${pageContext.request.contextPath}/img/accept_icon.png"
-														border="0" title="Aceptar cita" height="20" width="20"/>
-												</a>
-											
-												</td>
+														border="0" title="Solicitar cita" height="20" width="20" />
+												</a></td>
 											</tr>
 
 										</c:forEach>
-									
+
 									</tbody>
 								</table>
 
 							</div>
-						<div>
+
+					<form role="form" method="post" action="solicitar_cita.html"
+						modelAttribute="listaCitas">
+						<fieldset>
+							<div>
 								<input type="submit" class="btn btn-primary btn-lg"
 									value="Actualizar">
 							</div>
@@ -170,10 +263,6 @@
 					</form>
 
 				</div>
-
-
-
-
 			</div>
 		</div>
 		<p class="text-center">

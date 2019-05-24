@@ -175,19 +175,51 @@ public class EstudianteControl {
 		return new ModelAndView( "ver_citas_solicitadas" , "usuario", usr );
 	}
 	
-	@RequestMapping( value = "/borra_cita", method = RequestMethod.POST )
-	public ModelAndView borra_cita(@ModelAttribute("cita") Cita cita) {
+	@RequestMapping( "/borra_cita/{id_cita}" )
+	public String borra_cita(@PathVariable("id_cita") Integer id_cita) {
 
 
 		ApplicationContext context = new ClassPathXmlApplicationContext( "Spring-Datasource.xml" );	            
 		CitaDAO dao = (CitaDAO)context.getBean( "citaDAO" );
-		System.out.println(cita.getId_cita());
-		dao.borraCita(cita.getId_cita());
+				
+		dao.borrarCita(id_cita);
 		
+		return "redirect:/regresa.html";
+	}
+	
+	@RequestMapping( "/aceptar_cita/{id_cita}" )
+	public String aceptar_cita(@PathVariable("id_cita") Integer id_cita) {
+
+
+		ApplicationContext context = new ClassPathXmlApplicationContext( "Spring-Datasource.xml" );	            
+		CitaDAO dao = (CitaDAO)context.getBean( "citaDAO" );
+				
+		dao.aceptarCita(id_cita);
+		
+		return "redirect:/regresa.html";
+	}
+	@RequestMapping( "/rechazar_cita/{id_cita}" )
+	public String rechazar_cita(@PathVariable("id_cita") Integer id_cita) {
+
+
+		ApplicationContext context = new ClassPathXmlApplicationContext( "Spring-Datasource.xml" );	            
+		CitaDAO dao = (CitaDAO)context.getBean( "citaDAO" );
+				
+		dao.rechazarCita(id_cita);
+		
+		return "redirect:/regresa.html";
+	}
+	/*@RequestMapping( "/cerrar_sesion/" )
+	public String rechazar_cita() {
+		
+		return "redirect:/get.html";
+	}*/
+
+	@RequestMapping( value = "/regresa", method = RequestMethod.GET )
+	public ModelAndView regresa() {
+
 		return new ModelAndView( "ver_citas" , "usuario", usr );
 	}
-
-
 	//////////////////////////////ALUMNO////////////////////////////////
 	@RequestMapping( value = "/administrar_datos_alumno", method = RequestMethod.POST )
 	public ModelAndView administrar_datos_alumno(@ModelAttribute("usuario") Usuario usuario) {
@@ -225,20 +257,44 @@ public class EstudianteControl {
 	}
 	
 	@RequestMapping( value = "/solicitar_cita", method = RequestMethod.POST )
-	public ModelAndView solicitar_cita(@ModelAttribute("listaCitas") ListaCitas listaCitas) {
+	public ModelAndView solicitar_cita(@ModelAttribute("listaCitas") ListaCitas listaCitas,
+			@ModelAttribute("listaCitas2") ListaCitas listaCitas2,
+			@ModelAttribute("listaCitas3") ListaCitas listaCitas3) {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext( "Spring-Datasource.xml" );	            
 		CitaDAO dao = (CitaDAO)context.getBean( "citaDAO" );
 
-		ArrayList<Cita> lista = dao.consultaTodosDisponiblesArray();
+		ArrayList<Cita> lista = dao.consultaTodosDisponiblesMateArray();
 		listaCitas.setListaCitas( lista );
 		
-		System.out.println("#20000000000000000000000000000000000000000000000000000000000000");
+		lista = dao.consultaTodosDisponiblesFisiArray();
+		listaCitas2.setListaCitas( lista );
 		
-		return new ModelAndView( "solicitar_cita" , "listaCitas", listaCitas );
+		lista = dao.consultaTodosDisponiblesCompuArray();
+		listaCitas3.setListaCitas( lista );
+		
+		
+		return new ModelAndView( "solicitar_cita" , "usuario", usr );
 	}
+	
+	@RequestMapping( "/solicitar/{id_cita}" )
+	public String solicitar(@PathVariable("id_cita") Integer id_cita) {
 
 
+		ApplicationContext context = new ClassPathXmlApplicationContext( "Spring-Datasource.xml" );	            
+		CitaDAO dao = (CitaDAO)context.getBean( "citaDAO" );
+				
+		dao.solicitarCita(usr.getId_usuario(), id_cita);
+		
+		return "redirect:/regresa2.html";
+	}
+	
+	@RequestMapping( value = "/regresa2", method = RequestMethod.GET )
+	public ModelAndView regresa2() {
+
+		return new ModelAndView( "ver_citas_agendadas" , "usuario", usr );
+	}
+	
 	//////////////////////////////////////////////////////////////
 
 	@RequestMapping( value = "/save", method = RequestMethod.POST )

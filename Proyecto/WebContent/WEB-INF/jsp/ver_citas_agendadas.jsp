@@ -108,6 +108,20 @@
 							</fieldset>
 						</form>
 					</div>
+					<div>
+					<form role="form" method="get"
+							action="get.html">
+							<fieldset>
+								<div>
+									<input type="submit" class="btn btn-primary btn-lg"
+										value="Cerrar Sesion"
+										onclick="return confirm('¿ ${usuario.nombre} estas seguro que quieres salir de tu sesión?')"
+										>
+								</div>
+							
+							</fieldset>
+						</form>
+					</div>
 				</div>
 			</div>
 

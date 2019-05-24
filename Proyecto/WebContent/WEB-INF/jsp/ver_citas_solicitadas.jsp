@@ -119,6 +119,20 @@
 							</fieldset>
 						</form>
 					</div>
+					<div>
+					<form role="form" method="get"
+							action="get.html">
+							<fieldset>
+								<div>
+									<input type="submit" class="btn btn-primary btn-lg"
+										value="Cerrar Sesion"
+										onclick="return confirm('¿ ${usuario.nombre} estas seguro que quieres salir de tu sesión?')"
+										>
+								</div>
+							
+							</fieldset>
+						</form>
+					</div>
 					<hr>
 				</div>
 			</div>
@@ -161,36 +175,22 @@
 												<td>${cita.nombre_alumno}</td>
 												
 													<td>
-												<a href="${pageContext.request.contextPath}/aceptar/${cita.id_cita}.html"
-												>
+												<a href="${pageContext.request.contextPath}/aceptar_cita/${cita.id_cita}.html"
+												onclick="return confirm('¿Estas seguro que quieres aceptar la cita?')">
 														<img
 														src="${pageContext.request.contextPath}/img/accept_icon.png"
 														border="0" title="Aceptar cita" height="20" width="20"/>
 												</a>
-												<a href="${pageContext.request.contextPath}/borrar/${cita.id_cita}.html"
-												>
+												<a href="${pageContext.request.contextPath}/rechazar_cita/${cita.id_cita}.html"
+												onclick="return confirm('¿Estas seguro que quieres rechazar la cita?')">
 														<img
 														src="${pageContext.request.contextPath}/img/delete_icon.gif"
-														border="0" title="Borra cita" />
+														border="0" title="Rechazar cita" />
 												</a>
 												</td>
 											</tr>
 
 										</c:forEach>
-										<!--	<tr>
-											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>@fat</td>
-											<td>@mdo</td>
-										</tr>-->
 									</tbody>
 								</table>
 

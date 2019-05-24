@@ -119,6 +119,20 @@
 							</fieldset>
 						</form>
 					</div>
+					<div>
+						<form role="form" method="get"
+							action="get.html">
+							<fieldset>
+								<div>
+									<input type="submit" class="btn btn-primary btn-lg"
+										value="Cerrar Sesion"
+										onclick="return confirm('¿ ${usuario.nombre} estas seguro que quieres salir de tu sesión?')"
+										>
+								</div>
+							
+							</fieldset>
+						</form>
+					</div>
 					<hr>
 				</div>
 			</div>
@@ -130,100 +144,97 @@
 
 			<div class="row">
 				<div class="col-md-6">
-					
-							<h4>Mis citas asignadas</h4>
-							<div class="form-group">
 
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th class="warning" scope="col">#Cita</th>
-											<th class="warning" scope="col">Materia</th>
-											<th class="warning" scope="col">Lugar</th>
-											<th class="warning" scope="col">Fecha</th>
-											<th class="warning" scope="col">Hora</th>
-											<th class="warning" scope="col">Alumno</th>
-											<th class="warning" scope="col">Eliminar</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${listaCitas.listaCitas}" var="cita"
-											varStatus="status">
-											<tr>
-												<th scope="row">${cita.id_cita}</th>
-												<td>${cita.materia}</td>
-												<td>${cita.lugar}</td>
-												<td>${cita.fecha}</td>
-												<td>${cita.hora}</td>
-												<td>${cita.nombre_alumno}</td>
+					<h4>Mis citas asignadas</h4>
+					<div class="form-group">
 
-												<td>
-												<a href="${pageContext.request.contextPath}/borrar_cita/${cita.id_cita}.html"
-												onclick="return confirm('¿Estas seguro que quieres borrar la cita?')">
-														<img
-														src="${pageContext.request.contextPath}/img/delete_icon.gif"
-														border="0" title="Borra cita" />
-												</a></td>
-											</tr>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th class="warning" scope="col">#Cita</th>
+									<th class="warning" scope="col">Materia</th>
+									<th class="warning" scope="col">Lugar</th>
+									<th class="warning" scope="col">Fecha</th>
+									<th class="warning" scope="col">Hora</th>
+									<th class="warning" scope="col">Alumno</th>
+									<th class="warning" scope="col">Eliminar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${listaCitas.listaCitas}" var="cita"
+									varStatus="status">
+									<tr>
+										<th scope="row">${cita.id_cita}</th>
+										<td>${cita.materia}</td>
+										<td>${cita.lugar}</td>
+										<td>${cita.fecha}</td>
+										<td>${cita.hora}</td>
+										<td>${cita.nombre_alumno}</td>
 
-										</c:forEach>
+										<td><a
+											href="${pageContext.request.contextPath}/borra_cita/${cita.id_cita}.html"
+											onclick="return confirm('¿Estas seguro que quieres borrar la cita?')">
+												<img
+												src="${pageContext.request.contextPath}/img/delete_icon.gif"
+												border="0" title="Borra cita" />
+										</a></td>
+									</tr>
 
-									</tbody>
-								</table>
+								</c:forEach>
 
-							</div>
+							</tbody>
+						</table>
+
+					</div>
 
 
 					<hr>
 
-					<form role="form" method="post" action="ver_citas.html"
+					<!--<form role="form" method="post" action="ver_citas.html"
 						modelAttribute="listaCitas2">
-						<fieldset>
-							<h4>Mis citas disponibles</h4>
-							<div class="form-group">
+						<fieldset> -->
+					<h4>Mis citas disponibles</h4>
+					<div class="form-group">
 
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th class="success" scope="col">#Cita</th>
-											<th class="success" scope="col">Materia</th>
-											<th class="success" scope="col">Lugar</th>
-											<th class="success" scope="col">Fecha</th>
-											<th class="success" scope="col">Hora</th>
-											<th class="success" scope="col">Eliminar</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${listaCitas2.listaCitas}" var="cita"
-											varStatus="status">
-											<tr>
-												<th scope="row">${cita.id_cita}</th>
-												<td>${cita.materia}</td>
-												<td>${cita.lugar}</td>
-												<td>${cita.fecha}</td>
-												<td>${cita.hora}</td>
+						<table class="table table-striped">
+							<thead>
+								<tr>
 
-												<td>
-													<form role="form" method="post" action="borra_cita.html"
-														modelAttribute="cita">
-														<fieldset>
-															<div>
-																<input type="submit" class="btn btn-primary btn-lg"
-																	value="X">
-															</div>
-														</fieldset>
-													</form> <a
-													action="${pageContext.request.contextPath}/borrar_cita/${cita.id_cita}.html"
-													onclick="return confirm('¿Estas seguro que quieres borrar la cita?')">
-														<img
-														src="${pageContext.request.contextPath}/img/delete_icon.gif"
-														border="0" title="Borra cita" />
-												</a>
-												</td>
-											</tr>
+									<th class="success" scope="col">#Cita</th>
+									<th class="success" scope="col">Materia</th>
+									<th class="success" scope="col">Lugar</th>
+									<th class="success" scope="col">Fecha</th>
+									<th class="success" scope="col">Hora</th>
+									<th class="success" scope="col">Eliminar</th>
 
-										</c:forEach>
-										<!--	<tr>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${listaCitas2.listaCitas}" var="cita"
+									varStatus="status">
+
+									<tr>
+
+
+										<th scope="row">${cita.id_cita}</th>
+										<td>${cita.materia}</td>
+										<td>${cita.lugar}</td>
+										<td>${cita.fecha}</td>
+										<td>${cita.hora}</td>
+
+										<td><a
+											href="${pageContext.request.contextPath}/borra_cita/${cita.id_cita}.html"
+											onclick="return confirm('¿Estas seguro que quieres borrar la cita?')">
+												<img
+												src="${pageContext.request.contextPath}/img/delete_icon.gif"
+												border="0" title="Borra cita" />
+										</a></td>
+
+
+									</tr>
+
+								</c:forEach>
+								<!--	<tr>
 											<th scope="row">1</th>
 											<td>Mark</td>
 											<td>Otto</td>
@@ -237,11 +248,12 @@
 											<td>@fat</td>
 											<td>@mdo</td>
 										</tr>-->
-									</tbody>
-								</table>
+							</tbody>
+						</table>
 
-							</div>
-					<form role="form" method="post" action="ver_citas.html" modelAttribute="listaCitas">
+					</div>
+					<form role="form" method="post" action="ver_citas.html"
+						modelAttribute="listaCitas">
 						<fieldset>
 							<div>
 								<input type="submit" class="btn btn-primary btn-lg"

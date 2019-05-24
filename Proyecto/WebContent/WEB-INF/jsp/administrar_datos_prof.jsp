@@ -120,6 +120,20 @@
 							</fieldset>
 						</form>
 					</div>
+					<div>
+					<form role="form" method="get"
+							action="get.html">
+							<fieldset>
+								<div>
+									<input type="submit" class="btn btn-primary btn-lg"
+										value="Cerrar Sesion"
+										onclick="return confirm('¿ ${usuario.nombre} estas seguro que quieres salir de tu sesión?')"
+										>
+								</div>
+							
+							</fieldset>
+						</form>
+					</div>
 					<hr>
 				</div>
 			</div>
@@ -132,12 +146,12 @@
 					<form role="form" method="post" action="actualizar_datos_prof.html"
 						modelAttribute="usuario">
 						<fieldset>
-							<div class="form-group">
+							<!--<div class="form-group">
 								<input type="text" name="id_profesor" id="id_profesor"
 									class="form-control input-lg" placeholder="id_profesor"
 									value="${usuario.id_usuario}" disabled="true">
 								
-							</div>
+							</div>-->
 							<div class="form-group">
 								<input type="text" name="nombre" id="nombre"
 									class="form-control input-lg" placeholder="Nombre"

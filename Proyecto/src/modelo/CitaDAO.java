@@ -26,21 +26,22 @@ public class CitaDAO extends SimpleJdbcDaoSupport{
 	private static final String CONSULTATODASASIGNADASPROFESOR = "SELECT * FROM cita WHERE activa=true and solicitada = false and asignada = true and id_profesor = ";
 	private static final String CONSULTATODASDISPONIBLESPROFESOR = "SELECT * FROM cita WHERE activa=true and solicitada = false and asignada = false and id_profesor = ";
 	private static final String CONSULTATODASSOLICITADASPROFESOR = "SELECT * FROM cita WHERE activa=true and solicitada = true and asignada = false and id_profesor = ";
+	
 	private static final String AGREGACITA = "INSERT INTO `cita` (`id_profesor`,`materia`,`lugar`,`fecha`,`hora`,"+
 			"`solicitada`, `asignada`, `activa`) "+
 			"VALUES (?,?,?,?,?,?,?,true)";
+	
 	private static final String BORRACITA ="UPDATE cita SET activa = false WHERE id_cita = ? ";
 	private static final String CONSULTATODASALUMNOAGENDADAS = "SELECT * FROM cita WHERE activa=true and solicitada = false and asignada = true and id_alumno = ";
-	private static final String CONSULTATODASDISPONIBLES = "SELECT * FROM cita WHERE activa=true and solicitada = false and asignada = false ";
-
-
-	private static final String CONSULTATODOSALUMNO = "SELECT * FROM cita WHERE activa=true and id_alumno = ";
-	private static final String CONSULTATODOSPROFESOR = "SELECT * FROM cita WHERE activa=true and id_profesor = ";
-	private static final String MODIFICACITA =
-			"UPDATE cita SET id_cita = ?,id_profesor =  ?, id_alumno = ?, lugar = ?, fecha = ?, hora = ?, asignada = ?"+
-					"WHERE id_cita = ? ";
-
-
+	private static final String CONSULTATODASDISPONIBLESMATE = "SELECT * FROM cita WHERE activa=true and solicitada=false and asignada=false and materia = 'Matematicas'";
+	private static final String CONSULTATODASDISPONIBLESFISI = "SELECT * FROM cita WHERE activa=true and solicitada=false and asignada=false and materia = 'Fisica'";
+	private static final String CONSULTATODASDISPONIBLESCOMPU = "SELECT * FROM cita WHERE activa=true and solicitada=false and asignada=false and materia = 'Computacion'";
+	
+	
+	private static final String ACEPTARCITA ="UPDATE cita SET solicitada=false , asignada=true WHERE id_cita = ? ";
+	private static final String RECHAZARCITA ="UPDATE cita SET solicitada=false , asignada=false , id_alumno=null WHERE id_cita = ? ";
+	private static final String SOLICITARCITA ="UPDATE cita SET solicitada=true, id_alumno= ? WHERE id_cita = ? ";
+	
 	class ProyectosRowMapper implements ParameterizedRowMapper<Cita>  {
 
 		public Cita mapRow( ResultSet rs, int numeroRenglon ) throws SQLException {
@@ -73,13 +74,32 @@ public class CitaDAO extends SimpleJdbcDaoSupport{
 
 	}
 
-	public void borraCita( int id_cita ) {
+	public void borrarCita( int id_cita ) {
 
 		SimpleJdbcTemplate sjdbct = getSimpleJdbcTemplate();
 		sjdbct.update( BORRACITA, id_cita);
 
 	}
+	
+	public void aceptarCita( int id_cita ) {
 
+		SimpleJdbcTemplate sjdbct = getSimpleJdbcTemplate();
+		sjdbct.update( ACEPTARCITA, id_cita);
+
+	}
+	public void rechazarCita( int id_cita ) {
+
+		SimpleJdbcTemplate sjdbct = getSimpleJdbcTemplate();
+		sjdbct.update( RECHAZARCITA, id_cita);
+
+	}
+	public void solicitarCita(  int id_alumno, int id_cita ) {
+
+		SimpleJdbcTemplate sjdbct = getSimpleJdbcTemplate();
+		sjdbct.update( SOLICITARCITA, id_alumno, id_cita);
+
+	}
+	
 	public ArrayList<Cita> consultaTodosProfesorAsignadasArray(int id) {
 		SimpleJdbcTemplate sjdbc = getSimpleJdbcTemplate();
 		ArrayList<Cita> citas =
@@ -110,32 +130,26 @@ public class CitaDAO extends SimpleJdbcDaoSupport{
 		return  citas ; 
 	}
 
-	public ArrayList<Cita> consultaTodosDisponiblesArray(){
+	public ArrayList<Cita> consultaTodosDisponiblesMateArray(){
 		SimpleJdbcTemplate sjdbc = getSimpleJdbcTemplate();
 		ArrayList<Cita> citas =
-				(ArrayList<Cita>) sjdbc.query( CONSULTATODASDISPONIBLES, new ProyectosRowMapper() );	
+				(ArrayList<Cita>) sjdbc.query( CONSULTATODASDISPONIBLESMATE , new ProyectosRowMapper() );	
 
 		return  citas ; 
 	}
-
-
-
-
-
-	public ArrayList<Cita> consultaTodosAlumnoArray(int id) {
+	public ArrayList<Cita> consultaTodosDisponiblesFisiArray(){
 		SimpleJdbcTemplate sjdbc = getSimpleJdbcTemplate();
 		ArrayList<Cita> citas =
-				(ArrayList<Cita>) sjdbc.query( CONSULTATODASALUMNOAGENDADAS + id , new ProyectosRowMapper() );	
-		return  citas ;   	
+				(ArrayList<Cita>) sjdbc.query( CONSULTATODASDISPONIBLESFISI , new ProyectosRowMapper() );	
+
+		return  citas ; 
 	}
+	public ArrayList<Cita> consultaTodosDisponiblesCompuArray(){
+		SimpleJdbcTemplate sjdbc = getSimpleJdbcTemplate();
+		ArrayList<Cita> citas =
+				(ArrayList<Cita>) sjdbc.query( CONSULTATODASDISPONIBLESCOMPU , new ProyectosRowMapper() );	
 
-
-	public void modificaCita( Cita cita ) {
-
-		SimpleJdbcTemplate sjdbct = getSimpleJdbcTemplate();
-		sjdbct.update( MODIFICACITA, cita.getId_cita(), cita.getFecha(),cita.getHora(),cita.getLugar(),
-				cita.getId_alumno(),cita.getId_profesor(),cita.isAsignada());
-
+		return  citas ; 
 	}
 
 

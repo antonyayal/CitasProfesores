@@ -48,6 +48,9 @@ UNLOCK TABLES;
 
 LOCK TABLES `cita` WRITE;
 INSERT INTO `cita` VALUES (2200,2,1,'Facultad de Ciencias','2019-10-25','11:00',false,true,true,'Matematicas');
-INSERT INTO `cita` VALUES (2205,2,null,'Facultad de Ingenieria','2019-11-25','12:00',false,false,true,'Fisica');
-INSERT INTO `cita` VALUES (2208,2,1,'IIMAS','2019-12-25','13:00',true,false,true,'Quimica');
+INSERT INTO `cita` VALUES (2205,2,null,'Facultad de Ingenieria','2019-11-22','12:00',false,false,true,'Fisica');
+INSERT INTO `cita` VALUES (2208,2,1,'IIMAS','2019-12-12','13:00',true,false,true,'Computacion');
+INSERT INTO `cita` VALUES (2209,2,1,'IIMAS','2019-10-31','11:00',false,true,true,'Fisica');
+INSERT INTO `cita` VALUES (2210,2,null,'Facultad de Ciencias','2019-11-02','12:00',false,false,true,'Computacion');
+INSERT INTO `cita` VALUES (2222,2,1,'Facultad de Ingenieria','2019-12-12','13:00',true,false,true,'Matematicas');
 UNLOCK TABLES;
